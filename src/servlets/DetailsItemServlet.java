@@ -1,6 +1,7 @@
 package servlets;
 
 import db.DBManager;
+import db.DBUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public class DetailsItemServlet extends HomeServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        Item item = DBManager.getItemById(Long.parseLong(id));
+        Item item = DBUtil.getById(Long.parseLong(id));
         request.setAttribute("item", item);
         request.getRequestDispatcher("/details.jsp").forward(request, response);
     }

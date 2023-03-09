@@ -16,12 +16,23 @@
         if (item!=null) {
     %>
         <h1>Детальная страница Item</h1>
-        <h5><%=item.getId()%></h5>
-        <h5><%=item.getName()%></h5>
-        <h5><%=item.getPrice()%></h5>
-        <h5><%=item.getAmount()%></h5>
+        <form action="/editItem?id=<%=item.getId()%>" method="post">
+            <select name="i_name">
+                <option <%=item.getName().equals("IPhone X")?"selected":""%> >IPhone X</option>
+                <option <%=item.getName().equals("Samsung")?"selected":""%> >Samsung</option>
+                <option <%=item.getName().equals("XIAOMI")?"selected":""%> >XIAOMI</option>
+                <option <%=item.getName().equals("Google Pixel")?"selected":""%> >Google Pixel</option>
+                <option <%=item.getName().equals("Tesla Mobile")?"selected":""%> >Tesla Mobile</option>
+                <option <%=item.getName().equals("Redmi Note 8")?"selected":""%> >Redmi Note 8</option>
+            </select><br><br>
+            <input type="text" value="<%=item.getPrice()%>" name="i_price"><br><br>
+            <input type="text" value="<%=item.getAmount()%>" name="i_amount"><br><br>
+            <button>Edit</button>
+        </form>
     <%
         }
     %>
+
+
 </body>
 </html>

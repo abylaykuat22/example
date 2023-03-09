@@ -1,6 +1,7 @@
 package servlets;
 
 import db.DBManager;
+import db.DBUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import java.util.List;
 public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Item> items = DBManager.getItems();
+        List<Item> items = DBUtil.getItems();
         request.setAttribute("items", items);
         request.getRequestDispatcher("/home.jsp").forward(request, response);
     }

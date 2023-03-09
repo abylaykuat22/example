@@ -10,25 +10,24 @@ import models.Item;
 
 import java.io.IOException;
 
-@WebServlet(value = "/addItem")
-public class AddItemServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addItem.jsp").forward(req, resp);
-    }
-
+@WebServlet(value = "/editItem")
+public class EditItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
         String name = req.getParameter("i_name");
         String price = req.getParameter("i_price");
         String amount = req.getParameter("i_amount");
 
-        Item item = new Item();
-        item.setName(name);
-        item.setPrice(Double.parseDouble(price));
-        item.setAmount(Integer.parseInt(amount));
-
-        DBUtil.addItem(item);
-        resp.sendRedirect("/");
+        Item item = DBUtil.getById(Long.parseLong(id));
+        if (item.getId()!=null) {
+            item.setName(name);
+            item.setPrice(Double.parseDouble(price));
+            item.setAmount(Integer.parseInt(amount));
+            DBUtil.editItem(item);
+            resp.sendRedirect("/detailsItem?id="+id);
+        }else {
+            resp.sendRedirect("/");
+        }
     }
 }
